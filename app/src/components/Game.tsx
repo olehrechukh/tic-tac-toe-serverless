@@ -5,6 +5,7 @@ import { calculateWinner } from '../helpers';
 import { Square } from './Square'
 import './Game.css';
 import { WinnerPopup } from './WinnerPopup';
+import { TestApi } from './TestApi';
 
 
 const RestartState = styled.button`
@@ -55,6 +56,10 @@ export const Game = () => {
 			</div>
 
 			{winner && <WinnerPopup winner={winner} reset={() => jumpTo(0)}></WinnerPopup>}
+
+			<br></br>
+
+			<TestApi />
 		</div>
 	);
 };
