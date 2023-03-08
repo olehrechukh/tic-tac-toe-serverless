@@ -1,21 +1,30 @@
-import React from "react";
-import styled from "styled-components";
+import "./Square.css";
+import { motion } from "framer-motion";
 
-const SquareButton = styled.button`
-	background: lightblue;
-	border: 2px solid darkblue;
-	font-size: 30px;
-	font-weight: 800;
-	cursor: pointer;
-	outline: none;
-`;
-
-
-interface SquareProps {
-	onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
-	value: string;
+interface ResultProps {
+    clsName: string,
+    onClick: Function;
 }
 
-export const Square: React.FC<SquareProps> = ({ onClick, value }) => {
-	return <SquareButton onClick={onClick}>{value}</SquareButton>;
+export const Square: React.FC<ResultProps> = ({ clsName, onClick }) => {
+    const handleClick = () => {
+        onClick();
+    };
+
+    return (
+        <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            className="square"
+            onClick={handleClick}
+        >
+            {clsName && (
+                <motion.span
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    className={clsName.toLowerCase()}
+                ></motion.span>
+            )}
+        </motion.div>
+    );
 };

@@ -1,11 +1,13 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState } from 'react';
 import styled from "styled-components";
-
 import { Board } from './Board';
 import { calculateWinner } from '../helpers';
+import { Square } from './Square'
+import './Game.css';
+import { WinnerPopup } from './WinnerPopup';
 
-const GameState = styled.div`
-	width: 200px;
+
+const RestartState = styled.button`
 	margin: 20px auto;
 `;
 
@@ -39,13 +41,20 @@ export const Game = () => {
 	}
 
 	return (
-		<Fragment>
-			<Board squares={history[stepNumber]} onClick={handleClick} />
-			<GameState>
-				<p>{winner ? `Winner: ${winner}` : `Next Player ${isXNext ? 'X' : 'O'}`}</p>
+		<div className="tic-tac-toe">
+			<h1> TIC-TAC-TOE </h1>
 
-				<button onClick={() => jumpTo(0)}> Start new game</button>
-			</GameState>
-		</Fragment>
+			<RestartState onClick={() => jumpTo(0)}> Restart</RestartState>
+
+			<Board squares={history[stepNumber]} onClick={handleClick} />
+
+
+			<div className={`turn ${isXNext ? "left" : "right"}`}>
+				<Square clsName="x" onClick={() => { }} />
+				<Square clsName="o" onClick={() => { }} />
+			</div>
+
+			{winner && <WinnerPopup winner={winner} reset={() => jumpTo(0)}></WinnerPopup>}
+		</div>
 	);
 };

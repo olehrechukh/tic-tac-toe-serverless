@@ -1,4 +1,4 @@
-export function calculateWinner(squares: Array<any>) {
+export function calculateWinner(squares: Array<string>) {
 	const lines = [
 		[0, 1, 2],
 		[3, 4, 5],
@@ -16,6 +16,10 @@ export function calculateWinner(squares: Array<any>) {
 		if(squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
 			return squares[a];
 		}
+	}
+
+	if(squares.every(el => el)){
+		return "x | o";
 	}
 
 	return null;
